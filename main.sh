@@ -270,7 +270,8 @@ cat <<EOL > dev-ir.json
     ]
 }
 EOL
-            nohup ./Waterwall &
+            # nohup ./Waterwall &
+            ./run_screen.py
             echo "Tunnel is ready"
             clear
 
@@ -372,7 +373,8 @@ cat <<EOL > dev-ir.json
     ]
 }
 EOL
-            nohup ./Waterwall &
+            # nohup ./Waterwall &
+            ./run_screen.py
 
             echo "Tunnel is ready"
             clear
@@ -392,6 +394,7 @@ EOL
 
 unistall(){
 
+    echo $'\e[32mUninstalling WaterWall in 3 seconds... \e[0m' && sleep 1 && echo $'\e[32m2... \e[0m' && sleep 1 && echo $'\e[32m1... \e[0m' && sleep 1 && {
     rm Waterwall-linux-64.zip
     rm Waterwall-linux-64.zip*
     rm Waterwall
@@ -399,7 +402,15 @@ unistall(){
     rm core.json
     clear
     echo 'WaterWall Unistalled :(';
+    }
+
+
     loader
+}
+
+
+run_script(){
+
 }
 
 loader
