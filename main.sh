@@ -79,7 +79,7 @@ init(){
         install_fixer
         ;;
     2)
-        echo "simple 2"
+        unistall
         ;;
     0)
         echo -e "${GREEN}Exiting program...${NC}"
@@ -100,6 +100,302 @@ install_core(){
     chmod +rwx Waterwall
     
 
+cat <<EOL > /core.json
+{
+    "log": {
+        "path": "log/",
+        "core": {
+            "loglevel": "DEBUG",
+            "file": "core.log",
+            "console": true
+        },
+        "network": {
+            "loglevel": "DEBUG",
+            "file": "network.log",
+            "console": true
+
+        },
+        "dns": {
+            "loglevel": "SILENT",
+            "file": "dns.log",
+            "console": false
+
+        }
+    },
+    "dns": {},
+    "misc": {
+        "workers": 0,
+        "ram-profile": "server",
+        "libs-path": "libs/"
+    },
+    "configs": [
+        "dev-ir.json"
+    ]
+}
+EOL
+
+    echo 'WaterWall Core installed :)'
+
+}
+
+config_tunnel(){
+
+        clear
+        echo "+--------------------------------------------------------------------------------------------------------------+"
+        echo "|                                                                                                              |" 
+        echo "| __          __        _               __          __        _  _   _______                             _     |" 
+        echo "| \ \        / /       | |              \ \        / /       | || | |__   __|                           | |    |" 
+        echo "|  \ \  /\  / /   __ _ | |_   ___  _ __  \ \  /\  / /   __ _ | || |    | |    _   _  _ __   _ __    ___ | |    |" 
+        echo "|   \ \/  \/ /   / _  || __| / _ \| '__|  \ \/  \/ /   / _  || || |    | |   | | | || '_ \ |  _ \  / _ \| |    |" 
+        echo "|    \  /\  /   | (_| || |_ |  __/| |      \  /\  /   | (_| || || |    | |   | |_| || | | || | | ||  __/| |    |" 
+        echo "|     \/  \/     \__,_| \__| \___||_|       \/  \/     \__,_||_||_|    |_|    \__,_||_| |_||_| |_| \___||_|    |" 
+        echo "|                                                                                                              |" 
+        echo "+--------------------------------------------------------------------------------------------------------------+"                                                                                                         
+        echo -e "${GREEN}Server Country:${NC} $SERVER_COUNTRY"
+        echo -e "${GREEN}Server IP:${NC} $SERVER_IP"
+        echo -e "${GREEN}Server ISP:${NC} $SERVER_ISP"
+        echo "+---------------------------------------------------------------+"
+        echo -e "${GREEN}Please choose an option:${NC}"
+        echo "+---------------------------------------------------------------+"
+        echo -e "${BLUE}| 1  - IRAN"
+        echo -e "${BLUE}| 2  - Kharej"
+        echo -e "${BLUE}| 0  - Exit"
+        echo "+---------------------------------------------------------------+"
+        echo -e "\033[0m"
+
+        read -p "Enter option number: " setup
+        case $setup in
+        1)
+
+            read -p "Enter SNI" clear_sni
+            read -p "Enter Kharej IP" kharej_ip
+
+cat <<EOL > /dev-ir.json
+{
+    "name": "reverse_reality_grpc_hd_multiport_server",
+    "nodes": [
+        {
+            "name": "users_inbound",
+            "type": "TcpListener",
+            "settings": {
+                "address": "0.0.0.0",
+                "port": [23,65535],
+                "nodelay": true
+            },
+            "next": "header"
+        },
+        {
+            "name": "header",
+            "type": "HeaderClient",
+            "settings": {
+                "data": "src_context->port"
+            },
+            "next": "bridge2"
+        },
+        {
+            "name": "bridge2",
+            "type": "Bridge",
+            "settings": {
+                "pair": "bridge1"
+            }
+        },
+        {
+            "name": "bridge1",
+            "type": "Bridge",
+            "settings": {
+                "pair": "bridge2"
+            }
+        },
+        {
+            "name": "reverse_server",
+            "type": "ReverseServer",
+            "settings": {},
+            "next": "bridge1"
+        },
+        {
+            "name": "pbserver",
+            "type": "ProtoBufServer",
+            "settings": {},
+            "next": "reverse_server"
+        },
+        {
+            "name": "h2server",
+            "type": "Http2Server",
+            "settings": {},
+            "next": "pbserver"
+        },
+        {
+            "name": "halfs",
+            "type": "HalfDuplexServer",
+            "settings": {},
+            "next": "h2server"
+        },
+        {
+            "name": "reality_server",
+            "type": "RealityServer",
+            "settings": {
+                "destination": "reality_dest",
+                "password": "passwd"
+            },
+            "next": "halfs"
+        },
+        {
+            "name": "kharej_inbound",
+            "type": "TcpListener",
+            "settings": {
+                "address": "0.0.0.0",
+                "port": 443,
+                "nodelay": true,
+                "whitelist": [
+                    "$kharej_ip/32"
+                ]
+            },
+            "next": "reality_server"
+        },
+        {
+            "name": "reality_dest",
+            "type": "TcpConnector",
+            "settings": {
+                "nodelay": true,
+                "address": "$clear_sni",
+                "port": 443
+            }
+        }
+    ]
+}
+
+EOL
+
+            echo "Tunnel is ready"
+            clear
+            ./Waterwall
+
+            ;;
+        2)
+
+            read -p "Enter SNI" clear_sni
+            read -p "Enter IRAN IP" iran_ip
+
+
+
+cat <<EOL > /dev-ir.json
+
+{
+    "name": "reverse_reality_grpc_client_hd_multiport_client",
+    "nodes": [
+        {
+            "name": "outbound_to_core",
+            "type": "TcpConnector",
+            "settings": {
+                "nodelay": true,
+                "address": "127.0.0.1",
+                "port": "dest_context->port"
+            }
+        },
+        {
+            "name": "header",
+            "type": "HeaderServer",
+            "settings": {
+                "override": "dest_context->port"
+            },
+            "next": "outbound_to_core"
+        },
+        {
+            "name": "bridge1",
+            "type": "Bridge",
+            "settings": {
+                "pair": "bridge2"
+            },
+            "next": "header"
+        },
+        {
+            "name": "bridge2",
+            "type": "Bridge",
+            "settings": {
+                "pair": "bridge1"
+            },
+            "next": "reverse_client"
+        },
+        {
+            "name": "reverse_client",
+            "type": "ReverseClient",
+            "settings": {
+                "minimum-unused": 16
+            },
+            "next": "pbclient"
+        },
+        {
+            "name": "pbclient",
+            "type": "ProtoBufClient",
+            "settings": {},
+            "next": "h2client"
+        },
+        {
+            "name": "h2client",
+            "type": "Http2Client",
+            "settings": {
+                "host": "$clear_sni",
+                "port": 443,
+                "path": "/",
+                "content-type": "application/grpc",
+                "concurrency": 64
+            },
+            "next": "halfc"
+        },
+        {
+            "name": "halfc",
+            "type": "HalfDuplexClient",
+            "next": "reality_client"
+        },
+        
+        {
+            "name": "reality_client",
+            "type": "RealityClient",
+            "settings": {
+                "sni": "$clear_sni",
+                "password": "passwd"
+            },
+            "next": "outbound_to_iran"
+        },
+        {
+            "name": "outbound_to_iran",
+            "type": "TcpConnector",
+            "settings": {
+                "nodelay": true,
+                "address": "$iran_ip",
+                "port": 443
+            }
+        }
+    ]
+}
+
+
+
+EOL
+
+            echo "Tunnel is ready"
+            clear
+            ./Waterwall
+
+            ;;
+        0)
+            echo -e "${GREEN}Exiting program...${NC}"
+            exit 0
+            ;;
+        *)
+            echo "Not valid"
+            ;;
+        esac
+        
+
+}
+
+unistall(){
+    rm Waterwall-linux-64.zip
+    rm Waterwall
+    rm dev-ir.js
+    rm core.json
+    echo 'WaterWall Unistalled :(';
 }
 
 loader
