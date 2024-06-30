@@ -409,10 +409,4 @@ unistall(){
 
     loader
 }
-
-
-run_script(){
-
-}
-
 loader
