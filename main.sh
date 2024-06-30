@@ -137,6 +137,10 @@ cat <<EOL > core.json
 EOL
 
     echo 'WaterWall Core installed :)'
+    echo $'\e[32mUninstalling WaterWall in 3 seconds... \e[0m' && sleep 1 && echo $'\e[32m2... \e[0m' && sleep 1 && echo $'\e[32m1... \e[0m' && sleep 1 && {
+        clear
+        init
+    }
 
 }
 
