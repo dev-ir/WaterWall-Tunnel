@@ -445,7 +445,8 @@ else
 fi
 
 # Run WaterWall in a new detached screen session
-screen -d -m -S WaterWall /path/to/WaterWall
+# screen -d -m -S WaterWall /path/to/WaterWall
+screen -S dev.ir ./Waterwall
 
 echo "WaterWall has been started in a new screen session."
 
