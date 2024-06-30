@@ -98,43 +98,42 @@ init(){
 
 install_core(){
 
-    wget https://github.com/radkesvat/WaterWall/releases/download/v1.21/Waterwall-linux-64.zip
-    apt install unzip && unzip Waterwall-linux-64.zip
-    chmod +rwx Waterwall
+wget https://github.com/radkesvat/WaterWall/releases/download/v1.21/Waterwall-linux-64.zip
+apt install unzip && unzip Waterwall-linux-64.zip
+chmod +rwx Waterwall
     
+cat <<EOL > core.json
+    {
+        "log": {
+            "path": "log/",
+            "core": {
+                "loglevel": "DEBUG",
+                "file": "core.log",
+                "console": true
+            },
+            "network": {
+                "loglevel": "DEBUG",
+                "file": "network.log",
+                "console": true
 
-cat <<EOL > /core.json
-{
-    "log": {
-        "path": "log/",
-        "core": {
-            "loglevel": "DEBUG",
-            "file": "core.log",
-            "console": true
+            },
+            "dns": {
+                "loglevel": "SILENT",
+                "file": "dns.log",
+                "console": false
+
+            }
         },
-        "network": {
-            "loglevel": "DEBUG",
-            "file": "network.log",
-            "console": true
-
+        "dns": {},
+        "misc": {
+            "workers": 0,
+            "ram-profile": "server",
+            "libs-path": "libs/"
         },
-        "dns": {
-            "loglevel": "SILENT",
-            "file": "dns.log",
-            "console": false
-
-        }
-    },
-    "dns": {},
-    "misc": {
-        "workers": 0,
-        "ram-profile": "server",
-        "libs-path": "libs/"
-    },
-    "configs": [
-        "dev-ir.json"
-    ]
-}
+        "configs": [
+            "dev-ir.json"
+        ]
+    }
 EOL
 
     echo 'WaterWall Core installed :)'
@@ -173,7 +172,7 @@ config_tunnel(){
             read -p "Enter SNI : " clear_sni
             read -p "Enter Kharej IP : " kharej_ip
 
-cat <<EOL > /dev-ir.json
+cat <<EOL > dev-ir.json
 {
     "name": "reverse_reality_grpc_hd_multiport_server",
     "nodes": [
@@ -280,7 +279,7 @@ EOL
 
 
 
-cat <<EOL > /dev-ir.json
+cat <<EOL > dev-ir.json
 {
     "name": "reverse_reality_grpc_client_hd_multiport_client",
     "nodes": [
