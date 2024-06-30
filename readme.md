@@ -1,8 +1,12 @@
 <h1 align="center"/>⚡️ Welcome to WaterWall Tunnel ⚡️</h1>
 
-## Support project 
-
 **We don't need financial support, only Star (⭐) is enough, thank you.**
+
+
+**WaterWall Tunnel • Built on Xray Core**
+
+> **Disclaimer:** WaterWall is a simple core for tunneling and even direct user-server connections. based on high-performance, fully customizeable nodes for creating any kind of protocol without writing code for it.
+
 
 ## Install & Upgrade
 
