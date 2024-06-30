@@ -79,6 +79,9 @@ init(){
         install_fixer
         ;;
     2)
+        config_tunnel
+        ;;
+    3)
         unistall
         ;;
     0)
