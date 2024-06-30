@@ -394,10 +394,12 @@ EOL
 }
 
 unistall(){
+
     rm Waterwall-linux-64.zip
     rm Waterwall
     rm dev-ir.json
     rm core.json
+    clear
     echo 'WaterWall Unistalled :(';
 }
 
