@@ -99,7 +99,6 @@ init(){
 install_core(){
 
 wget https://github.com/radkesvat/WaterWall/releases/download/v1.21/Waterwall-linux-64.zip
-wget https://raw.githubusercontent.com/dev-ir/WaterWall-Tunnel/master/libs/run_screen.py
 apt install unzip && unzip Waterwall-linux-64.zip
 chmod +rwx Waterwall
     
@@ -402,7 +401,6 @@ unistall(){
     rm Waterwall
     rm dev-ir.json
     rm core.json
-    rm run_screen.py
     clear
     echo 'WaterWall Unistalled :(';
     }
@@ -446,7 +444,8 @@ fi
 
 # Run WaterWall in a new detached screen session
 # screen -d -m -S WaterWall /path/to/WaterWall
-screen -S dev.ir ./Waterwall
+# screen -S dev.ir ./Waterwall
+screen -dmS WaterWal /root/Waterwall
 
 echo "WaterWall has been started in a new screen session."
 
