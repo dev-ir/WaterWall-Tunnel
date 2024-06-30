@@ -76,8 +76,8 @@ init(){
     read -p "Enter option number: " choice
     case $choice in
     1)
-        install_fixer
-        ;;
+        install_core
+        ;;  
     2)
         config_tunnel
         ;;
@@ -170,8 +170,8 @@ config_tunnel(){
         case $setup in
         1)
 
-            read -p "Enter SNI" clear_sni
-            read -p "Enter Kharej IP" kharej_ip
+            read -p "Enter SNI : " clear_sni
+            read -p "Enter Kharej IP : " kharej_ip
 
 cat <<EOL > /dev-ir.json
 {
