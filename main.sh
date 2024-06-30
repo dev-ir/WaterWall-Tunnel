@@ -272,7 +272,8 @@ cat <<EOL > dev-ir.json
 }
 EOL
             # nohup ./Waterwall &
-            ./run_screen.py
+            # ./run_screen.py
+            run_screen
             echo "Tunnel is ready"
             clear
 
@@ -375,8 +376,8 @@ cat <<EOL > dev-ir.json
 }
 EOL
             # nohup ./Waterwall &
-            ./run_screen.py
-
+            # ./run_screen.py
+            run_screen
             echo "Tunnel is ready"
             clear
 
@@ -409,4 +410,45 @@ unistall(){
 
     loader
 }
+
+run_screen(){
+#!/bin/bash
+
+# Check if screen is installed
+if ! command -v screen &> /dev/null
+then
+    echo "Screen is not installed. Installing..."
+    
+    # Check the Linux distribution to use the correct package manager
+    if [ -f /etc/redhat-release ]; then
+        # CentOS/RHEL
+        sudo yum install screen -y
+    elif [ -f /etc/debian_version ]; then
+        # Debian/Ubuntu
+        sudo apt-get update
+        sudo apt-get install screen -y
+    else
+        echo "Unsupported Linux distribution. Please install screen manually."
+        exit 1
+    fi
+    
+    # Verify installation
+    if ! command -v screen &> /dev/null
+    then
+        echo "Failed to install screen. Please install manually."
+        exit 1
+    else
+        echo "Screen has been successfully installed."
+    fi
+else
+    echo "Screen is already installed."
+fi
+
+# Run WaterWall in a new detached screen session
+screen -d -m -S WaterWall /path/to/WaterWall
+
+echo "WaterWall has been started in a new screen session."
+
+}
+
 loader
