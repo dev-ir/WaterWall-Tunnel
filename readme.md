@@ -24,3 +24,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/dev-ir/WaterWall-Tunnel/master
 
 ## 🙏 Support with Crypto 
 - USDT (TRC20): `TVUqVMoCEe5DVUoxmPg8MwmgcHvZLqLjr4`
+
+## 📧 Join Telegram Channel
+
+TG : https://t.me/+EpErnDsDPhw3ZThk

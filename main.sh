@@ -279,7 +279,7 @@ EOL
         2)
 
             read -p "Enter SNI : " clear_sni
-            read -p "Enter IRAN IP" iran_ip
+            read -p "Enter IRAN IP : " iran_ip
 
 
 
