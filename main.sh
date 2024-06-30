@@ -399,6 +399,7 @@ unistall(){
     rm core.json
     clear
     echo 'WaterWall Unistalled :(';
+    loader
 }
 
 loader
