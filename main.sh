@@ -270,10 +270,9 @@ cat <<EOL > dev-ir.json
     ]
 }
 EOL
-
+            nohup ./Waterwall &
             echo "Tunnel is ready"
             clear
-            ./Waterwall
 
             ;;
         2)
@@ -373,10 +372,10 @@ cat <<EOL > dev-ir.json
     ]
 }
 EOL
+            nohup ./Waterwall &
 
             echo "Tunnel is ready"
             clear
-            ./Waterwall
 
             ;;
         0)
