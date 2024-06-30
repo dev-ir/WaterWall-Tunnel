@@ -266,7 +266,6 @@ cat <<EOL > /dev-ir.json
         }
     ]
 }
-
 EOL
 
             echo "Tunnel is ready"
@@ -276,13 +275,12 @@ EOL
             ;;
         2)
 
-            read -p "Enter SNI" clear_sni
+            read -p "Enter SNI : " clear_sni
             read -p "Enter IRAN IP" iran_ip
 
 
 
 cat <<EOL > /dev-ir.json
-
 {
     "name": "reverse_reality_grpc_client_hd_multiport_client",
     "nodes": [
@@ -371,9 +369,6 @@ cat <<EOL > /dev-ir.json
         }
     ]
 }
-
-
-
 EOL
 
             echo "Tunnel is ready"
