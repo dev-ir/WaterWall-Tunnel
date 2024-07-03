@@ -457,7 +457,7 @@ echo "WaterWall has been started in a new screen session."
 
 
 check_core_status() {
-    local file_path="dev-ir.json"
+    local file_path="core.json"
     local status
 
     if [ -f "$file_path" ]; then
