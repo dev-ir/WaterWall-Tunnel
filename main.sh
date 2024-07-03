@@ -62,10 +62,10 @@ init(){
     echo "|     \/  \/     \__,_| \__| \___||_|       \/  \/     \__,_||_||_|    |_|    \__,_||_| |_||_| |_| \___||_|    |" 
     echo "|                                                                                                              |" 
     echo "+--------------------------------------------------------------------------------------------------------------+"                                                                                                         
-    echo -e "${GREEN}Server Country:${NC} $SERVER_COUNTRY"
-    echo -e "${GREEN}Server IP:${NC} $SERVER_IP"
-    echo -e "${GREEN}Server ISP:${NC} $SERVER_ISP"
-    echo -e "${GREEN}WaterWall CORE:${NC} $WATER_CORE"
+    echo -e "${GREEN}Server Country :${NC} $SERVER_COUNTRY"
+    echo -e "${GREEN}Server IP :${NC} $SERVER_IP"
+    echo -e "${GREEN}Server ISP :${NC} $SERVER_ISP"
+    echo -e "${GREEN}WaterWall CORE :${NC} $WATER_CORE"
     echo "+--------------------------------------------------------------------------------------------------------------+"
     echo -e "${GREEN}Please choose an option:${NC}"
     echo "+--------------------------------------------------------------------------------------------------------------+"
@@ -457,7 +457,7 @@ echo "WaterWall has been started in a new screen session."
 
 
 check_core_status() {
-    local file_path="/dev-ir.json"
+    local file_path="dev-ir.json"
     local status
 
     if [ -f "$file_path" ]; then
