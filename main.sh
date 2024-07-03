@@ -42,7 +42,7 @@ loader(){
     # Fetch server isp using ip-api.com 
     SERVER_ISP=$(curl -sS "http://ip-api.com/json/$SERVER_IP" | jq -r '.isp')
 
-    WATER_CORE=$(check_file_status)
+    WATER_CORE=$(check_core_status)
 
     init
 
@@ -160,10 +160,10 @@ config_tunnel(){
         echo "|     \/  \/     \__,_| \__| \___||_|       \/  \/     \__,_||_||_|    |_|    \__,_||_| |_||_| |_| \___||_|    |" 
         echo "|                                                                                                              |" 
         echo "+--------------------------------------------------------------------------------------------------------------+"                                                                                                         
-        echo -e "${GREEN}Server Country:${NC} $SERVER_COUNTRY"
-        echo -e "${GREEN}Server IP:${NC} $SERVER_IP"
-        echo -e "${GREEN}Server ISP:${NC} $SERVER_ISP"
-        echo -e "${GREEN}WaterWall CORE:${NC} $WATER_CORE"
+        echo -e "${GREEN}Server Country :${NC} $SERVER_COUNTRY"
+        echo -e "${GREEN}Server IP :${NC} $SERVER_IP"
+        echo -e "${GREEN}Server ISP :${NC} $SERVER_ISP"
+        echo -e "${GREEN}WaterWall CORE :${NC} $WATER_CORE"
         echo "+---------------------------------------------------------------+"
         echo -e "${GREEN}Please choose an option:${NC}"
         echo "+---------------------------------------------------------------+"
