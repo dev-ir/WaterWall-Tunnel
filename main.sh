@@ -43,6 +43,7 @@ loader(){
     SERVER_ISP=$(curl -sS "http://ip-api.com/json/$SERVER_IP" | jq -r '.isp')
 
     WATER_CORE=$(check_core_status)
+    WATER_TUNNEL=$(check_tunnel_status)
 
     init
 
@@ -66,6 +67,7 @@ init(){
     echo -e "${GREEN}Server IP :${NC} $SERVER_IP"
     echo -e "${GREEN}Server ISP :${NC} $SERVER_ISP"
     echo -e "${GREEN}WaterWall CORE :${NC} $WATER_CORE"
+    echo -e "${GREEN}WaterWall Tunnel :${NC} $WATER_TUNNEL"
     echo "+--------------------------------------------------------------------------------------------------------------+"
     echo -e "${GREEN}Please choose an option:${NC}"
     echo "+--------------------------------------------------------------------------------------------------------------+"
@@ -164,6 +166,7 @@ config_tunnel(){
         echo -e "${GREEN}Server IP :${NC} $SERVER_IP"
         echo -e "${GREEN}Server ISP :${NC} $SERVER_ISP"
         echo -e "${GREEN}WaterWall CORE :${NC} $WATER_CORE"
+        echo -e "${GREEN}WaterWall Tunnel :${NC} $WATER_TUNNEL"
         echo "+---------------------------------------------------------------+"
         echo -e "${GREEN}Please choose an option:${NC}"
         echo "+---------------------------------------------------------------+"
@@ -458,6 +461,19 @@ echo "WaterWall has been started in a new screen session."
 
 check_core_status() {
     local file_path="core.json"
+    local status
+
+    if [ -f "$file_path" ]; then
+        status="Installed"
+    else
+        status="Not installed"
+    fi
+
+    echo "$status"
+}
+
+check_tunnel_status() {
+    local file_path="dev-ir.json"
     local status
 
     if [ -f "$file_path" ]; then
