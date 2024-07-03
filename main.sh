@@ -274,12 +274,11 @@ cat <<EOL > dev-ir.json
     ]
 }
 EOL
-            # nohup ./Waterwall &
-            # ./run_screen.py
             run_screen
-            echo "Tunnel is ready"
-            clear
-
+            echo $'\e[32mTunnel WaterWall in 3 seconds... \e[0m' && sleep 1 && echo $'\e[32m2... \e[0m' && sleep 1 && echo $'\e[32m1... \e[0m' && sleep 1 && {
+                clear
+                init
+            }
             ;;
         2)
 
@@ -378,11 +377,12 @@ cat <<EOL > dev-ir.json
     ]
 }
 EOL
-            # nohup ./Waterwall &
-            # ./run_screen.py
+
             run_screen
-            echo "Tunnel is ready"
-            clear
+            echo $'\e[32mTunnel WaterWall in 3 seconds... \e[0m' && sleep 1 && echo $'\e[32m2... \e[0m' && sleep 1 && echo $'\e[32m1... \e[0m' && sleep 1 && {
+                clear
+                init
+            }
 
             ;;
         0)
