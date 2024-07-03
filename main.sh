@@ -10,7 +10,7 @@ NC='\033[0m' # No Color
 
 cur_dir=$(pwd)
 # check root
-#[[ $EUID -ne 0 ]] && echo -e "${RED}Fatal error: ${plain} Please run this script with root privilege \n " && exit 1
+[[ $EUID -ne 0 ]] && echo -e "${RED}Fatal error: ${plain} Please run this script with root privilege \n " && exit 1
 
 install_jq() {
     if ! command -v jq &> /dev/null; then
@@ -42,6 +42,8 @@ loader(){
     # Fetch server isp using ip-api.com 
     SERVER_ISP=$(curl -sS "http://ip-api.com/json/$SERVER_IP" | jq -r '.isp')
 
+    WATER_CORE=$(check_file_status)
+
     init
 
 }
@@ -63,14 +65,15 @@ init(){
     echo -e "${GREEN}Server Country:${NC} $SERVER_COUNTRY"
     echo -e "${GREEN}Server IP:${NC} $SERVER_IP"
     echo -e "${GREEN}Server ISP:${NC} $SERVER_ISP"
-    echo "+---------------------------------------------------------------+"
+    echo -e "${GREEN}WaterWall CORE:${NC} $WATER_CORE"
+    echo "+--------------------------------------------------------------------------------------------------------------+"
     echo -e "${GREEN}Please choose an option:${NC}"
-    echo "+---------------------------------------------------------------+"
+    echo "+--------------------------------------------------------------------------------------------------------------+"
     echo -e "${BLUE}| 1  - INSTALL CORE"
     echo -e "${BLUE}| 2  - Config Tunnel "
     echo -e "${BLUE}| 3  - Unistall"
     echo -e "${BLUE}| 0  - Exit"
-    echo "+---------------------------------------------------------------+"
+    echo "+--------------------------------------------------------------------------------------------------------------+"
     echo -e "\033[0m"
 
     read -p "Enter option number: " choice
@@ -137,7 +140,7 @@ cat <<EOL > core.json
 EOL
 
     echo 'WaterWall Core installed :)'
-    echo $'\e[32mUninstalling WaterWall in 3 seconds... \e[0m' && sleep 1 && echo $'\e[32m2... \e[0m' && sleep 1 && echo $'\e[32m1... \e[0m' && sleep 1 && {
+    echo $'\e[32minstalling WaterWall in 3 seconds... \e[0m' && sleep 1 && echo $'\e[32m2... \e[0m' && sleep 1 && echo $'\e[32m1... \e[0m' && sleep 1 && {
         clear
         init
     }
@@ -160,6 +163,7 @@ config_tunnel(){
         echo -e "${GREEN}Server Country:${NC} $SERVER_COUNTRY"
         echo -e "${GREEN}Server IP:${NC} $SERVER_IP"
         echo -e "${GREEN}Server ISP:${NC} $SERVER_ISP"
+        echo -e "${GREEN}WaterWall CORE:${NC} $WATER_CORE"
         echo "+---------------------------------------------------------------+"
         echo -e "${GREEN}Please choose an option:${NC}"
         echo "+---------------------------------------------------------------+"
@@ -449,6 +453,20 @@ screen -dmS WaterWal /root/Waterwall
 
 echo "WaterWall has been started in a new screen session."
 
+}
+
+
+check_core_status() {
+    local file_path="/dev-ir.json"
+    local status
+
+    if [ -f "$file_path" ]; then
+        status="Installed"
+    else
+        status="Not installed"
+    fi
+
+    echo "$status"
 }
 
 loader
