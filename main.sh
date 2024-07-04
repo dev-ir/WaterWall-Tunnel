@@ -63,18 +63,18 @@ init(){
     echo "|     \/  \/     \__,_| \__| \___||_|       \/  \/     \__,_||_||_|    |_|    \__,_||_| |_||_| |_| \___||_|    |" 
     echo "|                                                                                                              |" 
     echo "+--------------------------------------------------------------------------------------------------------------+"                                                                                                         
-    echo -e "${GREEN}Server Country :${NC} $SERVER_COUNTRY"
-    echo -e "${GREEN}Server IP :${NC} $SERVER_IP"
-    echo -e "${GREEN}Server ISP :${NC} $SERVER_ISP"
-    echo -e "${GREEN}WaterWall CORE :${NC} $WATER_CORE"
-    echo -e "${GREEN}WaterWall Tunnel :${NC} $WATER_TUNNEL"
+    echo -e "|${GREEN}Server Country    |${NC} $SERVER_COUNTRY"
+    echo -e "|${GREEN}Server IP         |${NC} $SERVER_IP"
+    echo -e "|${GREEN}Server ISP        |${NC} $SERVER_ISP"
+    echo -e "|${GREEN}WaterWall CORE    |${NC} $WATER_CORE"
+    echo -e "|${GREEN}WaterWall Tunnel  |${NC} $WATER_TUNNEL"
     echo "+--------------------------------------------------------------------------------------------------------------+"
-    echo -e "${GREEN}Please choose an option:${NC}"
+    echo -e "|${YELLOW}Please choose an option:${NC}"
     echo "+--------------------------------------------------------------------------------------------------------------+"
-    echo -e "${BLUE}| 1  - INSTALL CORE"
-    echo -e "${BLUE}| 2  - Config Tunnel "
-    echo -e "${BLUE}| 3  - Unistall"
-    echo -e "${BLUE}| 0  - Exit"
+    echo -e "${YELLOW}| 1  - INSTALL CORE ${NC}"
+    echo -e "${YELLOW}| 2  - Config Tunnel ${NC}"
+    echo -e "${YELLOW}| 3  - Unistall ${NC}"
+    echo -e "${YELLOW}| 0  - Exit ${NC}"
     echo "+--------------------------------------------------------------------------------------------------------------+"
     echo -e "\033[0m"
 
@@ -162,12 +162,12 @@ config_tunnel(){
         echo "|     \/  \/     \__,_| \__| \___||_|       \/  \/     \__,_||_||_|    |_|    \__,_||_| |_||_| |_| \___||_|    |" 
         echo "|                                                                                                              |" 
         echo "+--------------------------------------------------------------------------------------------------------------+"                                                                                                         
-        echo -e "${GREEN}Server Country :${NC} $SERVER_COUNTRY"
-        echo -e "${GREEN}Server IP :${NC} $SERVER_IP"
-        echo -e "${GREEN}Server ISP :${NC} $SERVER_ISP"
-        echo -e "${GREEN}WaterWall CORE :${NC} $WATER_CORE"
-        echo -e "${GREEN}WaterWall Tunnel :${NC} $WATER_TUNNEL"
-        echo "+---------------------------------------------------------------+"
+        echo -e "|${GREEN}Server Country    |${NC} $SERVER_COUNTRY"
+        echo -e "|${GREEN}Server IP         |${NC} $SERVER_IP"
+        echo -e "|${GREEN}Server ISP        |${NC} $SERVER_ISP"
+        echo -e "|${GREEN}WaterWall CORE    |${NC} $WATER_CORE"
+        echo -e "|${GREEN}WaterWall Tunnel  |${NC} $WATER_TUNNEL"
+        echo "+--------------------------------------------------------------------------------------------------------------+"
         echo -e "${GREEN}Please choose an option:${NC}"
         echo "+---------------------------------------------------------------+"
         echo -e "${BLUE}| 1  - IRAN"
@@ -464,9 +464,9 @@ check_core_status() {
     local status
 
     if [ -f "$file_path" ]; then
-        status="Installed"
+        status="${GREEN}Installed"${NC}
     else
-        status="Not installed"
+        status=${RED}"Not installed"${NC}
     fi
 
     echo "$status"
@@ -477,9 +477,9 @@ check_tunnel_status() {
     local status
 
     if [ -f "$file_path" ]; then
-        status="Installed"
+        status="${GREEN}Enabled"${NC}
     else
-        status="Not installed"
+        status=${RED}"Disabled"${NC}
     fi
 
     echo "$status"
