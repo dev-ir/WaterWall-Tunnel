@@ -53,16 +53,15 @@ init(){
 
     #clear page .
     clear
-    echo "+--------------------------------------------------------------------------------------------------------------+"
-    echo "|                                                                                                              |" 
-    echo "| __          __        _               __          __        _  _   _______                             _     |" 
-    echo "| \ \        / /       | |              \ \        / /       | || | |__   __|                           | |    |" 
-    echo "|  \ \  /\  / /   __ _ | |_   ___  _ __  \ \  /\  / /   __ _ | || |    | |    _   _  _ __   _ __    ___ | |    |" 
-    echo "|   \ \/  \/ /   / _  || __| / _ \| '__|  \ \/  \/ /   / _  || || |    | |   | | | || '_ \ |  _ \  / _ \| |    |" 
-    echo "|    \  /\  /   | (_| || |_ |  __/| |      \  /\  /   | (_| || || |    | |   | |_| || | | || | | ||  __/| |    |" 
-    echo "|     \/  \/     \__,_| \__| \___||_|       \/  \/     \__,_||_||_|    |_|    \__,_||_| |_||_| |_| \___||_|    |" 
-    echo "|                                                                                                              |" 
-    echo "+--------------------------------------------------------------------------------------------------------------+"                                                                                                         
+    echo "+-----------------------------------------------------------------------------------------------------------------------+"
+    echo "| __          __        _               __          __        _  _   _______                             _              |" 
+    echo "| \ \        / /       | |              \ \        / /       | || | |__   __|                           | |             |" 
+    echo "|  \ \  /\  / /   __ _ | |_   ___  _ __  \ \  /\  / /   __ _ | || |    | |    _   _  _ __   _ __    ___ | |             |" 
+    echo "|   \ \/  \/ /   / _  || __| / _ \| '__|  \ \/  \/ /   / _  || || |    | |   | | | || '_ \ |  _ \  / _ \| |             |" 
+    echo "|    \  /\  /   | (_| || |_ |  __/| |      \  /\  /   | (_| || || |    | |   | |_| || | | || | | ||  __/| |             |" 
+    echo "|     \/  \/     \__,_| \__| \___||_|       \/  \/     \__,_||_||_|    |_|    \__,_||_| |_||_| |_| \___||_| ( 2.0.1 )   |" 
+    echo "|                                                                                                                       |" 
+    echo "+-----------------------------------------------------------------------------------------------------------------------+"                                                                                                         
     echo -e "|${GREEN}Server Country    |${NC} $SERVER_COUNTRY"
     echo -e "|${GREEN}Server IP         |${NC} $SERVER_IP"
     echo -e "|${GREEN}Server ISP        |${NC} $SERVER_ISP"
@@ -73,7 +72,8 @@ init(){
     echo "+--------------------------------------------------------------------------------------------------------------+"
     echo -e "${YELLOW}| 1  - INSTALL CORE ${NC}"
     echo -e "${YELLOW}| 2  - Config Tunnel ${NC}"
-    echo -e "${YELLOW}| 3  - Unistall ${NC}"
+    echo -e "${YELLOW}| 3  - Status Tunnel ${NC}"    
+    echo -e "${YELLOW}| 9  - Unistall ${NC}"
     echo -e "${YELLOW}| 0  - Exit ${NC}"
     echo "+--------------------------------------------------------------------------------------------------------------+"
     echo -e "\033[0m"
@@ -84,9 +84,9 @@ init(){
         install_core
         ;;  
     2)
-        config_tunnel
+        tunnel_menu
         ;;
-    3)
+    9)
         unistall
         ;;
     0)
@@ -98,6 +98,64 @@ init(){
         ;;
     esac
         
+
+}
+
+
+
+tunnel_menu(){
+
+
+    #clear page .
+    clear
+    echo "+-----------------------------------------------------------------------------------------------------------------------+"
+    echo "| __          __        _               __          __        _  _   _______                             _              |" 
+    echo "| \ \        / /       | |              \ \        / /       | || | |__   __|                           | |             |" 
+    echo "|  \ \  /\  / /   __ _ | |_   ___  _ __  \ \  /\  / /   __ _ | || |    | |    _   _  _ __   _ __    ___ | |             |" 
+    echo "|   \ \/  \/ /   / _  || __| / _ \| '__|  \ \/  \/ /   / _  || || |    | |   | | | || '_ \ |  _ \  / _ \| |             |" 
+    echo "|    \  /\  /   | (_| || |_ |  __/| |      \  /\  /   | (_| || || |    | |   | |_| || | | || | | ||  __/| |             |" 
+    echo "|     \/  \/     \__,_| \__| \___||_|       \/  \/     \__,_||_||_|    |_|    \__,_||_| |_||_| |_| \___||_| ( 2.0.1 )   |" 
+    echo "|                                                                                                                       |" 
+    echo "+-----------------------------------------------------------------------------------------------------------------------+"                                                                                                         
+    echo -e "|${GREEN}Server Country    |${NC} $SERVER_COUNTRY"
+    echo -e "|${GREEN}Server IP         |${NC} $SERVER_IP"
+    echo -e "|${GREEN}Server ISP        |${NC} $SERVER_ISP"
+    echo -e "|${GREEN}WaterWall CORE    |${NC} $WATER_CORE"
+    echo -e "|${GREEN}WaterWall Tunnel  |${NC} $WATER_TUNNEL"
+    echo "+--------------------------------------------------------------------------------------------------------------+"
+    echo -e "|${YELLOW}Please choose an option:${NC}"
+    echo "+--------------------------------------------------------------------------------------------------------------+"
+    echo -e "${YELLOW}| 1  - HalfDuplex ${NC}"
+    echo -e "${YELLOW}| 2  - Reverse Tunnel ( None TLS ) ${NC}"
+    echo -e "${YELLOW}| 3  - Trojan protocol ${NC}"    
+    echo -e "${YELLOW}| 4  - Bgp4 Tunnel or Direct ${NC}"    
+    echo -e "${YELLOW}| 5  - Reality Tunnel Reverse ${NC}"    
+    echo -e "${YELLOW}| 9  - Unistall ${NC}"
+    echo -e "${YELLOW}| 0  - Exit ${NC}"
+    echo "+--------------------------------------------------------------------------------------------------------------+"
+    echo -e "\033[0m"
+
+    read -p "Enter option number: " choice
+    case $choice in
+    1)
+        halfDuplex_config_tunnel
+        ;;  
+    2)
+        #
+        ;;
+    9)
+        unistall
+        ;;
+    0)
+        echo -e "${GREEN}Exiting program...${NC}"
+        exit 0
+        ;;
+    *)
+        echo "Not valid"
+        ;;
+    esac
+     
+
 
 }
 
@@ -149,7 +207,7 @@ EOL
 
 }
 
-config_tunnel(){
+halfDuplex_config_tunnel(){
 
         clear
         echo "+--------------------------------------------------------------------------------------------------------------+"
@@ -400,22 +458,6 @@ EOL
 
 }
 
-unistall(){
-
-    echo $'\e[32mUninstalling WaterWall in 3 seconds... \e[0m' && sleep 1 && echo $'\e[32m2... \e[0m' && sleep 1 && echo $'\e[32m1... \e[0m' && sleep 1 && {
-    rm Waterwall-linux-64.zip
-    rm Waterwall-linux-64.zip*
-    rm Waterwall
-    rm dev-ir.json
-    rm core.json
-    clear
-    echo 'WaterWall Unistalled :(';
-    }
-
-
-    loader
-}
-
 run_screen(){
 #!/bin/bash
 
@@ -449,9 +491,6 @@ else
     echo "Screen is already installed."
 fi
 
-# Run WaterWall in a new detached screen session
-# screen -d -m -S WaterWall /path/to/WaterWall
-# screen -S dev.ir ./Waterwall
 screen -dmS WaterWal /root/Waterwall
 
 echo "WaterWall has been started in a new screen session."
@@ -483,6 +522,22 @@ check_tunnel_status() {
     fi
 
     echo "$status"
+}
+
+unistall(){
+
+    echo $'\e[32mUninstalling WaterWall in 3 seconds... \e[0m' && sleep 1 && echo $'\e[32m2... \e[0m' && sleep 1 && echo $'\e[32m1... \e[0m' && sleep 1 && {
+    rm Waterwall-linux-64.zip
+    rm Waterwall-linux-64.zip*
+    rm Waterwall
+    rm dev-ir.json
+    rm core.json
+    clear
+    echo 'WaterWall Unistalled :(';
+    }
+
+
+    loader
 }
 
 loader
