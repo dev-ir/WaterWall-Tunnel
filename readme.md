@@ -28,3 +28,6 @@ bash <(curl -Ls https://raw.githubusercontent.com/dev-ir/WaterWall-Tunnel/master
 ## 📧 Join Telegram Channel
 
 TG : https://t.me/+EpErnDsDPhw3ZThk
+
+## Stargazers over time
+[![Stargazers over time](https://starchart.cc/dev-ir/WaterWall-Tunnel.svg?variant=adaptive)](https://starchart.cc/dev-ir/WaterWall-Tunnel)
