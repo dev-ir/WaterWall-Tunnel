@@ -127,9 +127,9 @@ tunnel_menu(){
     echo "+--------------------------------------------------------------------------------------------------------------+"
     echo -e "${YELLOW}| 1  - HalfDuplex ${NC}"
     echo -e "${YELLOW}| 2  - Reverse Tunnel ( None TLS ) ${NC}"
-    echo -e "${YELLOW}| 3  - Trojan protocol ${NC}"    
-    echo -e "${YELLOW}| 4  - Bgp4 Tunnel or Direct ${NC}"    
-    echo -e "${YELLOW}| 5  - Reality Tunnel Reverse ${NC}"    
+    echo -e "${YELLOW}| 3  - Trojan protocol ( soon ) ${NC}"    
+    echo -e "${YELLOW}| 4  - Bgp4 Tunnel or Direct ( soon ) ${NC}"    
+    echo -e "${YELLOW}| 5  - Reality Tunnel Reverse ( soon ) ${NC}"    
     echo -e "${YELLOW}| 9  - Unistall ${NC}"
     echo -e "${YELLOW}| 0  - Exit ${NC}"
     echo "+--------------------------------------------------------------------------------------------------------------+"
@@ -141,7 +141,7 @@ tunnel_menu(){
         halfDuplex_config_tunnel
         ;;  
     2)
-        #
+        bash <(curl -Ls https://raw.githubusercontent.com/dev-ir/WaterWall-Tunnel/master/tunnels/reverse_tunnel.sh)
         ;;
     9)
         unistall
