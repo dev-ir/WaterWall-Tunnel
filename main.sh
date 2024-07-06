@@ -532,6 +532,7 @@ unistall(){
     rm Waterwall
     rm dev-ir.json
     rm core.json
+    rm connector.sh 
     pkill screen
     clear
     echo 'WaterWall Unistalled :(';
