@@ -51,6 +51,10 @@ loader(){
 
 init(){
 
+
+    WATER_CORE=$(check_core_status)
+    WATER_TUNNEL=$(check_tunnel_status)
+
     #clear page .
     clear
     echo "+-----------------------------------------------------------------------------------------------------------------------+"
