@@ -10,7 +10,7 @@ NC='\033[0m' # No Color
 
 cur_dir=$(pwd)
 # check root
-[[ $EUID -ne 0 ]] && echo -e "${RED}Fatal error: ${plain} Please run this script with root privilege \n " && exit 1
+# [[ $EUID -ne 0 ]] && echo -e "${RED}Fatal error: ${plain} Please run this script with root privilege \n " && exit 1
 
 install_jq() {
     if ! command -v jq &> /dev/null; then
@@ -31,7 +31,7 @@ install_jq() {
 
 loader(){
 
-    install_jq
+    # install_jq
 
     # Get server IP
     SERVER_IP=$(hostname -I | awk '{print $1}')
@@ -532,6 +532,7 @@ unistall(){
     rm Waterwall
     rm dev-ir.json
     rm core.json
+    pkill screen
     clear
     echo 'WaterWall Unistalled :(';
     }
