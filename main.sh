@@ -31,7 +31,7 @@ install_jq() {
 
 loader(){
 
-    # install_jq
+    install_jq
 
     # Get server IP
     SERVER_IP=$(hostname -I | awk '{print $1}')
