@@ -111,9 +111,18 @@ cat <<EOL > dev-ir.json
                 "port": [80,65535],
                 "nodelay": true
             },
-            "next":  "bridge2"
+            "next":  "header"
         },
-      
+
+        {
+            "name": "header",
+            "type": "HeaderClient",
+            "settings": {
+                "data": "src_context->port"
+            },
+            "next": "bridge2"
+        },
+
         {
             "name": "bridge2",
             "type": "Bridge",
@@ -182,18 +191,27 @@ cat <<EOL > dev-ir.json
             "settings": {
                 "nodelay": true,
                 "address":"127.0.0.1",
-                "port":443
+                "port":"dest_context->port"
             }
 
         },
-      
+
+        {
+            "name": "header",
+            "type": "HeaderServer",
+            "settings": {
+                "override": "dest_context->port"
+            },
+            "next": "outbound_to_core"
+        },
+
         {
             "name": "bridge1",
             "type": "Bridge",
             "settings": {
                 "pair": "bridge2"
             },
-            "next": "outbound_to_core"
+            "next": "header"
 
         },
         {
@@ -228,6 +246,7 @@ cat <<EOL > dev-ir.json
 
     ]
 }
+
 EOL
 cat <<EOL > /root/connector.sh
 /root/Waterwall
