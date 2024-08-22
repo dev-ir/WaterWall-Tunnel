@@ -49,39 +49,50 @@ loader(){
 
 }
 
-init(){
 
+menu(){
+    clear
+    # Get server IP
+    SERVER_IP=$(hostname -I | awk '{print $1}')
+    
+    # Fetch server country using ip-api.com
+    SERVER_COUNTRY=$(curl -sS "http://ip-api.com/json/$SERVER_IP" | jq -r '.country')
+    
+    # Fetch server isp using ip-api.com
+    SERVER_ISP=$(curl -sS "http://ip-api.com/json/$SERVER_IP" | jq -r '.isp')
 
     WATER_CORE=$(check_core_status)
     WATER_TUNNEL=$(check_tunnel_status)
 
-    #clear page .
-    clear
     echo "+-----------------------------------------------------------------------------------------------------------------------+"
     echo "| __          __        _               __          __        _  _   _______                             _              |" 
     echo "| \ \        / /       | |              \ \        / /       | || | |__   __|                           | |             |" 
     echo "|  \ \  /\  / /   __ _ | |_   ___  _ __  \ \  /\  / /   __ _ | || |    | |    _   _  _ __   _ __    ___ | |             |" 
     echo "|   \ \/  \/ /   / _  || __| / _ \| '__|  \ \/  \/ /   / _  || || |    | |   | | | || '_ \ |  _ \  / _ \| |             |" 
     echo "|    \  /\  /   | (_| || |_ |  __/| |      \  /\  /   | (_| || || |    | |   | |_| || | | || | | ||  __/| |             |" 
-    echo "|     \/  \/     \__,_| \__| \___||_|       \/  \/     \__,_||_||_|    |_|    \__,_||_| |_||_| |_| \___||_| ( 2.0.1 )   |" 
-    echo "|                                                                                                                       |" 
-    echo "+-----------------------------------------------------------------------------------------------------------------------+"                                                                                                         
+    echo "|     \/  \/     \__,_| \__| \___||_|       \/  \/     \__,_||_||_|    |_|    \__,_||_| |_||_| |_| \___||_| ( 2.2 )     |" 
+    echo "+-----------------------------------------------------------------------------------------------------------------------+"
+    echo -e "|Telegram Channel : ${GREEN}@DVHOST_CLOUD ${NC}                       YouTube : ${RED}youtube.com/@dvhost_cloud${NC}  "
+    echo "+-----------------------------------------------------------------------------------------------------------------------+"
     echo -e "|${GREEN}Server Country    |${NC} $SERVER_COUNTRY"
     echo -e "|${GREEN}Server IP         |${NC} $SERVER_IP"
     echo -e "|${GREEN}Server ISP        |${NC} $SERVER_ISP"
     echo -e "|${GREEN}WaterWall CORE    |${NC} $WATER_CORE"
     echo -e "|${GREEN}WaterWall Tunnel  |${NC} $WATER_TUNNEL"
-    echo "+--------------------------------------------------------------------------------------------------------------+"
+    echo "+-----------------------------------------------------------------------------------------------------------------------+"
     echo -e "|${YELLOW}Please choose an option:${NC}"
-    echo "+--------------------------------------------------------------------------------------------------------------+"
-    echo -e "${YELLOW}| 1  - INSTALL CORE ${NC}"
-    echo -e "${YELLOW}| 2  - Config Tunnel ${NC}"
-    echo -e "${YELLOW}| 3  - Status Tunnel ${NC}"    
-    echo -e "${YELLOW}| 9  - Unistall ${NC}"
-    echo -e "${YELLOW}| 0  - Exit ${NC}"
-    echo "+--------------------------------------------------------------------------------------------------------------+"
+    echo "+-----------------------------------------------------------------------------------------------------------------------+"
+    echo -e $1
+    echo "+-----------------------------------------------------------------------------------------------------------------------+"
     echo -e "\033[0m"
+}
 
+
+
+init(){
+
+    menu "| 1 - INSTALL CORE \n| 2  - Config Tunnel \n| 3  - Status Tunnel  \n| 9 - Unistall \n| 0  - Exit"
+    
     read -p "Enter option number: " choice
     case $choice in
     1)
@@ -105,39 +116,10 @@ init(){
 
 }
 
-
-
 tunnel_menu(){
 
-
-    #clear page .
-    clear
-    echo "+-----------------------------------------------------------------------------------------------------------------------+"
-    echo "| __          __        _               __          __        _  _   _______                             _              |" 
-    echo "| \ \        / /       | |              \ \        / /       | || | |__   __|                           | |             |" 
-    echo "|  \ \  /\  / /   __ _ | |_   ___  _ __  \ \  /\  / /   __ _ | || |    | |    _   _  _ __   _ __    ___ | |             |" 
-    echo "|   \ \/  \/ /   / _  || __| / _ \| '__|  \ \/  \/ /   / _  || || |    | |   | | | || '_ \ |  _ \  / _ \| |             |" 
-    echo "|    \  /\  /   | (_| || |_ |  __/| |      \  /\  /   | (_| || || |    | |   | |_| || | | || | | ||  __/| |             |" 
-    echo "|     \/  \/     \__,_| \__| \___||_|       \/  \/     \__,_||_||_|    |_|    \__,_||_| |_||_| |_| \___||_| ( 2.0.1 )   |" 
-    echo "|                                                                                                                       |" 
-    echo "+-----------------------------------------------------------------------------------------------------------------------+"                                                                                                         
-    echo -e "|${GREEN}Server Country    |${NC} $SERVER_COUNTRY"
-    echo -e "|${GREEN}Server IP         |${NC} $SERVER_IP"
-    echo -e "|${GREEN}Server ISP        |${NC} $SERVER_ISP"
-    echo -e "|${GREEN}WaterWall CORE    |${NC} $WATER_CORE"
-    echo -e "|${GREEN}WaterWall Tunnel  |${NC} $WATER_TUNNEL"
-    echo "+--------------------------------------------------------------------------------------------------------------+"
-    echo -e "|${YELLOW}Please choose an option:${NC}"
-    echo "+--------------------------------------------------------------------------------------------------------------+"
-    echo -e "${YELLOW}| 1  - HalfDuplex ${NC}"
-    echo -e "${YELLOW}| 2  - Reverse Tunnel ( None TLS ) ${NC}"
-    echo -e "${YELLOW}| 3  - Trojan protocol ( soon ) ${NC}"    
-    echo -e "${YELLOW}| 4  - Bgp4 Tunnel or Direct ( soon ) ${NC}"    
-    echo -e "${YELLOW}| 5  - Reality Tunnel Reverse ( soon ) ${NC}"    
-    echo -e "${YELLOW}| 9  - Unistall ${NC}"
-    echo -e "${YELLOW}| 0  - Exit ${NC}"
-    echo "+--------------------------------------------------------------------------------------------------------------+"
-    echo -e "\033[0m"
+    menu "| 1 - HalfDuplex \n| 2  - Reverse Tunnel \n| 3  - Trojan protocol  \n| 4  - Bgp4 Tunnel or Direct  \n| 5  - Reality Tunnel Reverse  \n| 9 - Unistall \n| 0  - Exit"
+    
 
     read -p "Enter option number: " choice
     case $choice in
